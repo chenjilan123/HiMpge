@@ -84,6 +84,10 @@ namespace HiMpge
                 //pData 为需要解码的 H264 nalu 数据，length 为该数据的长度
                 IntPtr pData = Marshal.AllocCoTaskMem(data.Length);
                 Marshal.Copy(data, 0, pData, data.Length);
+
+                var bytes = new byte[data.Length];
+                Marshal.Copy(pData, bytes, 0, bytes.Length);
+
                 uint length = (uint)data.Length;
 
                 var resCode = hi_h264dec.Hi264DecFrame(_decHandle, pData, length, 0, ref _decodeFrame, 0);
